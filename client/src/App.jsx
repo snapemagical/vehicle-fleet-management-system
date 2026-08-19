@@ -9,8 +9,16 @@ import Profile from "./core/pages/Profile.jsx";
 import AuditLogPage from "./core/pages/AuditLogPage.jsx";
 import NotFound from "./core/pages/NotFound.jsx";
 
-// Phase 1: core-only routes. The fleet module's pages (Vehicles, Drivers,
-// Trips, Maintenance) get imported and added here in Phase 2.
+import VehicleListPage from "./modules/fleet/ui/VehicleListPage.jsx";
+import VehicleFormPage from "./modules/fleet/ui/VehicleFormPage.jsx";
+import DriverListPage from "./modules/fleet/ui/DriverListPage.jsx";
+import DriverFormPage from "./modules/fleet/ui/DriverFormPage.jsx";
+import MaintenanceListPage from "./modules/fleet/ui/MaintenanceListPage.jsx";
+import MaintenanceFormPage from "./modules/fleet/ui/MaintenanceFormPage.jsx";
+import TripListPage from "./modules/fleet/ui/TripListPage.jsx";
+import TripFormPage from "./modules/fleet/ui/TripFormPage.jsx";
+import TripEditPage from "./modules/fleet/ui/TripEditPage.jsx";
+import MyTripsPage from "./modules/fleet/ui/MyTripsPage.jsx";
 
 export default function App() {
   const [config, setConfig] = useState(null);
@@ -40,7 +48,107 @@ export default function App() {
                   }
                 />
 
-                {/* fleet module routes land here in Phase 2 */}
+                {/* fleet module routes */}
+                <Route path="/vehicles" element={<VehicleListPage />} />
+                <Route
+                  path="/vehicles/new"
+                  element={
+                    <ProtectedRoute allowedRoles={["dispatcher"]}>
+                      <VehicleFormPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/vehicles/:id/edit"
+                  element={
+                    <ProtectedRoute allowedRoles={["dispatcher"]}>
+                      <VehicleFormPage />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/drivers"
+                  element={
+                    <ProtectedRoute allowedRoles={["dispatcher"]}>
+                      <DriverListPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/drivers/new"
+                  element={
+                    <ProtectedRoute allowedRoles={["dispatcher"]}>
+                      <DriverFormPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/drivers/:id/edit"
+                  element={
+                    <ProtectedRoute allowedRoles={["dispatcher"]}>
+                      <DriverFormPage />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/maintenance"
+                  element={
+                    <ProtectedRoute allowedRoles={["dispatcher"]}>
+                      <MaintenanceListPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/maintenance/new"
+                  element={
+                    <ProtectedRoute allowedRoles={["dispatcher"]}>
+                      <MaintenanceFormPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/maintenance/:id/edit"
+                  element={
+                    <ProtectedRoute allowedRoles={["dispatcher"]}>
+                      <MaintenanceFormPage />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/trips"
+                  element={
+                    <ProtectedRoute allowedRoles={["dispatcher"]}>
+                      <TripListPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/trips/new"
+                  element={
+                    <ProtectedRoute allowedRoles={["dispatcher"]}>
+                      <TripFormPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/trips/:id/edit"
+                  element={
+                    <ProtectedRoute allowedRoles={["dispatcher"]}>
+                      <TripEditPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/my-trips"
+                  element={
+                    <ProtectedRoute allowedRoles={["driver"]}>
+                      <MyTripsPage />
+                    </ProtectedRoute>
+                  }
+                />
 
                 <Route path="*" element={<NotFound />} />
               </Routes>
